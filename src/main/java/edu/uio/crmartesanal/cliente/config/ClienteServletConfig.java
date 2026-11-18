@@ -1,4 +1,4 @@
-package edu.uio.crmartesanal.config;
+package edu.uio.crmartesanal.cliente.config;
 import edu.uio.crmartesanal.cliente.controller.ClienteServlet;
 import edu.uio.crmartesanal.cliente.service.ClienteService;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -16,8 +16,9 @@ public class ClienteServletConfig {
             ClienteService clienteService,
             JsonMapper jsonMapper) {
         ClienteServlet servlet = new ClienteServlet(clienteService, jsonMapper);
+// "/api/clientes/*" atiende /api/clientes Y /api/clientes/5, /api/clientes/6, ...
         ServletRegistrationBean<ClienteServlet> registro =
-                new ServletRegistrationBean<>(servlet, "/api/clientes");
+                new ServletRegistrationBean<>(servlet, "/api/clientes/*");
         registro.setName("clienteServlet");
         return registro;
     }
